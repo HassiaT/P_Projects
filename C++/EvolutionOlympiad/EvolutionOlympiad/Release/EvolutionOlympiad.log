@@ -1,0 +1,7 @@
+﻿  pch.cpp
+  EvolutionOlympiad.cpp
+c:\users\hassi\source\repos\evolutionolympiad\evolutionolympiad\evolutionolympiad.cpp(21): warning C4005: 'NDEBUG': macro redefinition
+  c:\users\hassi\source\repos\evolutionolympiad\evolutionolympiad\pch.cpp: note: see previous definition of 'NDEBUG'
+c:\users\hassi\source\repos\evolutionolympiad\evolutionolympiad\evolutionolympiad.cpp(48): warning C4018: '>=': signed/unsigned mismatch
+c:\users\hassi\source\repos\evolutionolympiad\evolutionolympiad\evolutionolympiad.cpp(185): warning C4018: '<': signed/unsigned mismatch
+  EvolutionOlympiad.vcxproj -> C:\Users\hassi\source\repos\EvolutionOlympiad\Release\EvolutionOlympiad.lib

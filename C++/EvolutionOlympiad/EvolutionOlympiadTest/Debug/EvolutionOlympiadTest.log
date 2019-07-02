@@ -1,5 +1,7 @@
 ﻿cl : Command line warning D9035: option 'Gm' has been deprecated and will be removed in a future release
   test.cpp
+c:\users\hassi\source\repos\evolutionolympiad\evolutionolympiad\evolutionolympiad.cpp(48): warning C4018: '>=': signed/unsigned mismatch
+c:\users\hassi\source\repos\evolutionolympiad\evolutionolympiad\evolutionolympiad.cpp(185): warning C4018: '<': signed/unsigned mismatch
 c:\users\hassi\source\repos\evolutionolympiad\evolutionolympiad\binarytree.hpp(177): warning C4715: 'BinaryTree<int>::find': not all control paths return a value
 c:\users\hassi\source\repos\evolutionolympiad\evolutionolympiad\binarytree.hpp(31): warning C4715: 'BinaryTree<int>::isLeaf': not all control paths return a value
   EvolutionOlympiadTest.vcxproj -> C:\Users\hassi\source\repos\EvolutionOlympiad\Debug\EvolutionOlympiadTest.exe

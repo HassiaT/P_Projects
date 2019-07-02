@@ -1,0 +1,4 @@
+﻿  EvolutionOlympiad.cpp
+c:\users\hassi\source\repos\evolutionolympiad\evolutionolympiad\evolutionolympiad.cpp(45): warning C4018: '>=': signed/unsigned mismatch
+c:\users\hassi\source\repos\evolutionolympiad\evolutionolympiad\evolutionolympiad.cpp(173): warning C4018: '<': signed/unsigned mismatch
+  EvolutionOlympiad.vcxproj -> C:\Users\hassi\source\repos\EvolutionOlympiad\Debug\EvolutionOlympiad.exe

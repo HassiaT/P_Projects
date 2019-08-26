@@ -1,0 +1,328 @@
+﻿@model TalkApplication.Models.RoomViewModel
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/Content/chat.css">
+
+
+    <script type="text/javascript" src="~/Scripts/JS/MyFunctions.js"></script>
+
+
+    <style>
+
+        .room {
+            left: 550px;
+            position: fixed;
+            margin: 0 auto;
+            background-color: lightpink;
+        }
+
+        .main-section {
+            width: 500px;
+            position: fixed;
+            margin: 75px;
+            left: 550px;
+        }
+
+        .first-section:hover {
+            cursor: pointer;
+        }
+
+        .open-more {
+            bottom: 0px;
+            transition: 2s;
+        }
+
+        .border-chat {
+            border: 3px solid white;
+            margin: 0px;
+        }
+
+        .first-section {
+            background-color: #FFE4E1;
+        }
+
+            .first-section p {
+                color: black;
+                text-align: center;
+                padding: 7px 0px;
+            }
+
+                .first-section p:hover {
+                    color: #fff;
+                    cursor: pointer;
+                }
+
+        .right-first-section {
+            text-align: right;
+        }
+
+            .right-first-section i {
+                color: #fff;
+                font-size: 15px;
+                padding: 12px 3px;
+            }
+
+                .right-first-section i:hover {
+                    color: #fff;
+                }
+
+        .chat-section ul li {
+            list-style: none;
+            margin-top: 10px;
+            position: relative;
+            word-wrap: break-word;
+        }
+
+        .chat-section {
+            overflow-y: scroll;
+            height: 300px;
+        }
+
+            .chat-section ul {
+                padding: 0px;
+            }
+
+        .left-chat img, .right-chat img {
+            width: 50px;
+            height: 50px;
+            float: left;
+            margin: 0px 10px;
+        }
+
+        .right-chat img {
+            float: right;
+        }
+
+        .second-section {
+            padding: 0px;
+            margin: 0px;
+            background-color: #FFE4E1;
+            height: 300px;
+        }
+
+        .left-chat, .right-chat {
+            overflow: hidden;
+        }
+
+            .left-chat p, .right-chat p {
+                word-wrap: break-word;
+                background-color: lightcoral;
+                padding: 10px;
+                color: #fff;
+                border-radius: 5px;
+                float: left;
+                width: 60%;
+                margin-bottom: 20px;
+            }
+
+            .left-chat span, .right-chat span {
+                position: absolute;
+                left: 70px;
+                top: 45px;
+                color: #B7BCC5;
+            }
+
+            .right-chat span {
+                left: 45px;
+            }
+
+            .right-chat p {
+                float: right;
+                background-color: #FFFFFF;
+                color: lightcoral;
+                word-wrap: break-word;
+            }
+
+        .third-section {
+            border-top: 1px solid #EEEEEE;
+            background-color: white;
+        }
+
+        #which {
+            margin-left: 50%;
+            margin-top: 3px;
+            font-size: large;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .text-bar input {
+            width: 90%;
+            margin-left: -15px;
+            padding: 10px 10px;
+            border: 1px solid #fff;
+            word-wrap: break-word;
+        }
+
+        .text-bar a i {
+            background-color: lightcoral;
+            color: white;
+            width: 45px;
+            height: 45px;
+            padding: 15px;
+            border-radius: 50%;
+            text-align: center;
+        }
+
+
+        .left-chat:before {
+            content: " ";
+            position: absolute;
+            top: 0px;
+            left: 55px;
+            bottom: 150px;
+            border: 15px solid transparent;
+            border-top-color: lightcoral;
+        }
+
+        .right-chat:before {
+            content: " ";
+            position: absolute;
+            top: 0px;
+            right: 55px;
+            bottom: 150px;
+            border: 15px solid transparent;
+            border-top-color: #fff;
+        }
+
+        .fa fa-arrow-right {
+            color: red;
+        }
+
+        .super {
+            display: flex;
+            justify-content: space-between;
+        }
+
+            .super #log {
+                background-color: powderblue;
+                flex: 0 0 65%;
+                border-radius: 4px;
+                height: 25px;
+                color: black;
+            }
+
+            .super #leave {
+                background-color: powderblue;
+                flex: 1;
+                color: black;
+                border-radius: 4px;
+                height: 25px;
+            }
+    </style>
+
+    @section Scripts{
+
+        @Scripts.Render("/Scripts/jquery.signalR-2.2.2.min.js")
+        @Scripts.Render("/signalr/hubs")
+        <script type="text/javascript">
+            var options = { transport: ['webSockets'] };
+
+            $(function () {
+                var chat = $.connection.atalkhub;
+                window.onbeforeunload = function () {
+                    alert("You are about to be disconnected!");
+                    chat.server.sayBye($("#username").val(), $("#myRoom").val());
+                };
+
+                chat.client.alert = function (message) {
+                    $(".chat-section ul").append('<div class="messa"><p><strong>' + message + '</strong></p></div>');
+                };
+
+                chat.client.displaymessageToPage = function (name, message) {
+                    if (name == $("#username").val()) {
+                        $(".chat-section ul").append('<li><div class="left-chat"><img src="/Content/MyPictures/avatar2.png" alt="Avatar"><p>' + '<strong>' + name + '</strong>:' + message + '</p><span>' + getThetime() + '</span></div></li>');
+                    } else if (name != $("#username").val()) {
+                        $(".chat-section ul").append('<li><div class="right-chat"><img src="/Content/MyPictures/avatar1.jpg" alt="Avatar"><p>' + '<strong>' + name + '</strong>:' + message + '</p><span>' + getThetime() + '</span></div></li>');
+
+                    }
+                };
+
+                $("#message").focus();
+                $.connection.hub.start(options).done(function () {
+                    $.connection.hub.logging = true;
+                    chat.server.joinRoom($("#username").val(), $("#myRoom").val());
+                    $("#sendmessage").click(function () {
+                        if ($("#message").val() != '') {
+                            chat.server.send($("#username").val(), $("#message").val(), $("#myRoom").val());
+                        }
+                        $("#message").val('').focus();
+                    });
+                    $("#log").click(function () {
+                        chat.server.sayBye($("#username").val(), $("#myRoom").val());
+                    });
+                    $("#leave").click(function () {
+                        chat.server.leaveRoom($("#username").val(), $("#myRoom").val());
+                    });
+                });
+                $.connection.hub.start(options);
+            });
+        </script>
+    }
+
+    @{
+        ViewBag.Title = "Go";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        string whichRoom = ViewData["room"] as string;
+        string currentUser = ViewData["currentUser"] as string;
+    }
+</head>
+
+<body>
+    <h2 class="room">Enjoy your talk!</h2><br />
+    @Html.Hidden("username", currentUser)
+    @Html.Hidden("myRoom", whichRoom)
+
+    <div class="main-section">
+        <div class="row border-chat">
+            <div class="col-md-12 col-sm-12 col-xs-12 first-section">
+                <div class="row">
+                    <div class="col-md-8 col-sm-6 col-xs-6 left-first-section">
+                        <p id="which">@whichRoom</p><br />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row border-chat">
+            <div class="col-md-12 col-sm-12 col-xs-12 second-section">
+                <div class="chat-section">
+                    <ul></ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row border-chat">
+            <div class="col-md-12 col-sm-12 col-xs-12 third-section">
+                <div class="text-bar">
+                    <input type="text" id="message" placeholder="Write a message"><a href="#"><i class="fa fa-arrow-right" id="sendmessage" true"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="super">
+                @using (Html.BeginForm("LogOut", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.HiddenFor(m => m.username, new { @Value = @currentUser })
+                    @Html.HiddenFor(m => m.room, new { @Value = @whichRoom })
+                    <input type="submit" id="log" name="Log out" value="Log out" class="login-submit" />
+                }
+                @using (Html.BeginForm("Leave", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.HiddenFor(m => m.username, new { @Value = @currentUser })
+                    @Html.HiddenFor(m => m.room, new { @Value = @whichRoom })
+                    <input type="submit" id="leave" name="Leave room" value="Leave room" class="login-submit" />
+                }
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+

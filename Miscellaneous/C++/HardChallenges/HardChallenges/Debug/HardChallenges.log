@@ -1,6 +1,5 @@
-﻿  pch.cpp
-  HardChallenges.cpp
+﻿  HardChallenges.cpp
 c:\users\hassi\source\repos\hardchallenges\hardchallenges\hardchallenges.cpp(16): warning C4018: '<': signed/unsigned mismatch
-c:\users\hassi\source\repos\hardchallenges\hardchallenges\hardchallenges.cpp(58): warning C4018: '<': signed/unsigned mismatch
-c:\users\hassi\source\repos\hardchallenges\hardchallenges\hardchallenges.cpp(65): warning C4018: '<': signed/unsigned mismatch
-  HardChallenges.vcxproj -> C:\Users\hassi\source\repos\HardChallenges\Debug\HardChallenges.dll
+c:\users\hassi\source\repos\hardchallenges\hardchallenges\hardchallenges.cpp(57): warning C4018: '<': signed/unsigned mismatch
+c:\users\hassi\source\repos\hardchallenges\hardchallenges\hardchallenges.cpp(63): warning C4018: '<': signed/unsigned mismatch
+  HardChallenges.vcxproj -> C:\Users\hassi\source\repos\HardChallenges\Debug\HardChallenges.lib

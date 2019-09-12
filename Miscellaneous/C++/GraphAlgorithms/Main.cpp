@@ -5,7 +5,7 @@
 #include "PrimAlgorithm.h"
 #include "Kruskal.h"
 #include "djikstra.h"
-
+#include "BellmanFord.h"
 
 using namespace std;
 
@@ -32,7 +32,7 @@ int main()
 {
 	cout.precision(2.0);
 	int n = 5;
-	int start_Point=3;
+	int start_Point=1;
 	vector<vector<int>> edges = { {1,2,3}, {1,3,4},{4,2,6},{5,2,2},{2,3,5},{3,5,7} };
 	Graph graph(n, &edges);
 	/*queue<Edge> q_Prim = PrimsAlgorithm(graph, start_Point);
@@ -48,10 +48,16 @@ int main()
 	cout << "\n";
 */
 
-	cout << "DJIKSTRA ALGORITHM : " << "   \n";
-	DjikstraResults results = djikstraAlgorithm(graph, start_Point);
-	printoutshortestPaths(&results, start_Point);
+	//cout << "DJIKSTRA ALGORITHM : " << "   \n";
+	//DjikstraResults results = djikstraAlgorithm(graph, start_Point);
+	//printoutshortestPaths(&results, start_Point);
 	cout << "\n";
+	cout << "\n";
+
+	BellmanFord(graph, start_Point);
+
+
+
 	cout << " PRESS KEYBOARD TO END PROGRAM  \n";
 	int r;
 	cin >> r;

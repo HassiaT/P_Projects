@@ -9,11 +9,11 @@
 using namespace std;
 
 
-
 void gettingEdges(Graph graph, DjikstraResults *dji)
 {
 	int V = graph.getV();
 	vector<vector<int>> *edges = graph.getEdges();
+	
 	for (int i = 0; i < edges->size(); i++)
 	{
 		vector<int>oneEdge = (*edges)[i];
@@ -23,57 +23,6 @@ void gettingEdges(Graph graph, DjikstraResults *dji)
 	}
 }
 
-stack<int>getShortestPath(int s, int dest, DjikstraResults *dji)
-{
-	stack<int> onePath_;
-	if (s == dest)
-	{
-		onePath_.push(s);
-		return onePath_;
-	}
-
-	for (int currentNode = dest; currentNode != s; currentNode = (dji->parents)[currentNode])
-	{
-		if (currentNode == -1) break;
-		onePath_.push(currentNode);
-	}
-	onePath_.push(s);
-	return onePath_;
-}
-
-
-void allTheShortestPaths(int s, int n, DjikstraResults *dji)
-{
-	int numberofNodes = n;
-	while (numberofNodes > 0)
-	{
-		stack<int> onePath = getShortestPath(s, numberofNodes, dji);
-		dji->edgesTo[numberofNodes] = (onePath);
-		numberofNodes--;
-	}
-}
-
-
-void printoutshortestPaths(DjikstraResults *dji, int start)
-{
-	string thepath = "";
-	cout << " These are the shortest paths from single source :" << start << endl;
-	for (int i = 1; i < dji->edgesTo.size(); i++)
-	{
-		cout << "PATH BETWEEN " << start << " AND " << i << " IS :";
-		stack<int> path = dji->edgesTo[i];
-		thepath = "";
-		while (!path.empty())
-		{
-			int current = path.top();
-			path.pop();
-			cout << current;
-			if (!path.empty()) cout << " -> ";
-			else cout << fixed << "    :" << dji->distanceTo[i];
-		}
-		cout << "\n";
-	}
-}
 
 
 DjikstraResults djikstraAlgorithm(Graph graph, int start)

@@ -66,16 +66,37 @@ struct DjikstraResults
 	vector<int>parents;
 	vector<double>distanceTo;
 
-
+	/* Constructor */
 	DjikstraResults(int _v) :v(_v) {
 		vector<Edge> new_Edge;
 		stack<int> new_Edge_stack;
-
 		allTheEdges.assign(v + 1, new_Edge);
 		edgesTo.assign(v + 1, new_Edge_stack);
 		marked.assign(v + 1, false);
-		parents.assign(v + 1,-1);
+		parents.assign(v + 1, -1);
 		distanceTo.assign(v + 1, numeric_limits<double>::max());
 	};
 };
 
+
+struct DirectedNegativeCycle {
+	int v; //number of vertices
+	vector<stack<int>> cycles;
+	vector<bool>marked;
+	vector<int>edgeTo;
+	vector<bool> onstack;
+	DjikstraResults * results;
+
+	/* Constructor */
+	DirectedNegativeCycle(int _v) :v(_v) {
+		edgeTo.assign(v + 1, 0);
+		marked.assign(v + 1, false);
+		onstack.assign(v + 1, false);
+		results = new DjikstraResults(v);
+	};
+};
+
+void gettingEdges(Graph, DjikstraResults *);
+stack<int>getShortestPath(int, int, DjikstraResults *);
+void allTheShortestPaths(int, int , DjikstraResults *);
+void printoutshortestPaths(DjikstraResults *, int);

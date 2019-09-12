@@ -62,7 +62,6 @@ queue<Edge> PrimsAlgorithm(Graph graph, int start)
 	parent[start] = -1;
 	int previous_Node = start;
 
-
 	while (!PQ->empty())
 	{
 		pair<double, int> p = (*PQ->begin());

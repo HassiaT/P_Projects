@@ -4,6 +4,8 @@
 #include "pch.h"
 #include "PrimAlgorithm.h"
 #include "Kruskal.h"
+#include "djikstra.h"
+
 
 using namespace std;
 
@@ -30,10 +32,10 @@ int main()
 {
 	cout.precision(2.0);
 	int n = 5;
-	int start_Point = 1;
+	int start_Point=3;
 	vector<vector<int>> edges = { {1,2,3}, {1,3,4},{4,2,6},{5,2,2},{2,3,5},{3,5,7} };
 	Graph graph(n, &edges);
-	queue<Edge> q_Prim = PrimsAlgorithm(graph, start_Point);
+	/*queue<Edge> q_Prim = PrimsAlgorithm(graph, start_Point);
 	cout << "MINIMUM SPANNING TREE WITH PRIMS ALGORITHM :" << "   \n";
 	displayMST(q_Prim);
 	cout << "\n";
@@ -44,7 +46,12 @@ int main()
 	displayMST(q_Kruskal);
 	cout << "\n";
 	cout << "\n";
+*/
 
+	cout << "DJIKSTRA ALGORITHM : " << "   \n";
+	DjikstraResults results = djikstraAlgorithm(graph, start_Point);
+	printoutshortestPaths(&results, start_Point);
+	cout << "\n";
 	cout << " PRESS KEYBOARD TO END PROGRAM  \n";
 	int r;
 	cin >> r;

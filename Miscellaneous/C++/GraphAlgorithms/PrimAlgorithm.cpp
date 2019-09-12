@@ -12,7 +12,6 @@ using namespace std;
 typedef pair<int, double> PAIR_WEIGHT;
 
 
-
 map<int, vector<pair<int, int>>>* buildAdjList(vector<vector<int>>& graph)
 {
 	map<int, vector<pair<int, int>>> *adjList = new map<int, vector<pair<int, int>>>;

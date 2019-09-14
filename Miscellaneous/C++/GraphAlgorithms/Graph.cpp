@@ -74,14 +74,14 @@ void printoutshortestPaths(DjikstraResults *dji, int start)
 	{
 		cout << "PATH BETWEEN " << start << " AND " << i << " IS :";
 		stack<int> path = dji->edgesTo[i];
-		thepath = "";
 		while (!path.empty())
 		{
 			int current = path.top();
 			path.pop();
 			cout << current;
+			double real_cost = (dji->distanceTo[i] == 0.0) ? -1.0 : dji->distanceTo[i];
 			if (!path.empty()) cout << " -> ";
-			else cout << fixed << "    :" << dji->distanceTo[i];
+			else cout << fixed << "    :" << real_cost;
 		}
 		cout << "\n";
 	}

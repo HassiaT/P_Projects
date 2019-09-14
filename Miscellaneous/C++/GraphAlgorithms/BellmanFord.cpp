@@ -50,7 +50,6 @@ void printOutNegativeCycles(DirectedNegativeCycle *r)
 }
 
 
-
 void dfsSpecializedCycle(Graph graph, DirectedNegativeCycle *r, int current)
 {
 	DjikstraResults *results = r->results;
@@ -81,9 +80,9 @@ void dfsSpecializedCycle(Graph graph, DirectedNegativeCycle *r, int current)
 			oneCycle.push(current);
 			stack<int> copy_cycle = oneCycle;
 			double L = lengthCycle(copy_cycle, r->results);
-			
+
 			//IS IT A NEGATIVE CYCLE ?
-			if ( L < 0)
+			if (L < 0)
 				r->cycles.push_back(oneCycle);
 		}
 	}
@@ -111,20 +110,15 @@ void BellmanFord(Graph graph, int current)
 		int v = queueNodes.front();
 		queueNodes.pop();
 		onQ[v] = false;
-		
-		
 		for (unsigned int i = 0; i < (results->allTheEdges[v].size()); i++)
 		{
 			Edge i_ = results->allTheEdges[v][i];
 			int node_to = i_.v;
-			
-			
 			if (results->distanceTo[node_to] > i_.w + results->distanceTo[v])
 			{
 				results->distanceTo[node_to] = i_.w + results->distanceTo[v];
 				r->edgeTo[node_to] = v;
 				r->results->parents[node_to] = v;
-				
 				if (onQ[node_to] == false)
 				{
 					queueNodes.push(node_to);
@@ -140,7 +134,7 @@ void BellmanFord(Graph graph, int current)
 	replace(++results->distanceTo.begin(), results->distanceTo.end(), INF_POSITIVE, -1.0);
 	allTheShortestPaths(current, vertices, results);
 	printOutNegativeCycles(r);
-	cout << "BELLMAN-FORD ALGORITHM SHORTES PATHS : \n";
+	cout << "BELLMAN-FORD ALGORITHM SHORTEST PATHS : \n";
 	printoutshortestPaths(results, current);
 
 }

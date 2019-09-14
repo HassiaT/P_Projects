@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClInclude Include="BellmanFord.h" />
     <ClInclude Include="djikstra.h" />
+    <ClInclude Include="Floyd.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="Kruskal.h" />
     <ClInclude Include="pch.h" />
@@ -161,6 +162,7 @@
   <ItemGroup>
     <ClCompile Include="BellmanFord.cpp" />
     <ClCompile Include="djikstra.cpp" />
+    <ClCompile Include="Floyd.cpp" />
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="Kruskal.cpp" />
     <ClCompile Include="Main.cpp" />

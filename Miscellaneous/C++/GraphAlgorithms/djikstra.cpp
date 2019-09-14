@@ -24,7 +24,6 @@ void gettingEdges(Graph graph, DjikstraResults *dji)
 }
 
 
-
 DjikstraResults djikstraAlgorithm(Graph graph, int start)
 {
 	double INF = numeric_limits<double>::max();
@@ -33,7 +32,6 @@ DjikstraResults djikstraAlgorithm(Graph graph, int start)
 	gettingEdges(graph, dji);
 	vector<vector<int>> *edges = graph.getEdges();
 	priority_queue<Edge, vector<Edge>, CompareEdge> PQ;
-
 	dji->distanceTo[start] = 0.0;
 	Edge e_new(start, start, 0.0);
 	dji->marked[start] = true;

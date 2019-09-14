@@ -9,6 +9,7 @@ using namespace std;
 typedef pair<int, double> PAIR_WEIGHT;
 
 
+
 struct Compare
 {
 	bool operator() (const PAIR_WEIGHT p, const PAIR_WEIGHT p2)
@@ -17,7 +18,6 @@ struct Compare
 		else  return p.second < p2.second;
 	};
 };
-
 
 struct Edge
 {
@@ -36,9 +36,6 @@ struct CompareEdge {
 	};
 };
 
-
-
-
 class Graph
 {
 
@@ -53,8 +50,6 @@ public:
 	void setV(int);
 	vector<vector<int>> * getEdges();
 	void setV(vector<vector<int>> *);
-
-
 };
 
 struct DjikstraResults
@@ -77,7 +72,6 @@ struct DjikstraResults
 		distanceTo.assign(v + 1, numeric_limits<double>::max());
 	};
 };
-
 
 struct DirectedNegativeCycle {
 	int v; //number of vertices

@@ -1,0 +1,4 @@
+BASE_URL = http://apilayer.net/api/
+ACCESS_KEY = /* PUT YOUR API ACCESS KEY HERE FOR THE CODE TO RUN CORRECTLY */
+ENDPOINT = live
+project.name = parent-maven-aoa-program

@@ -40,49 +40,6 @@ namespace TalkApplication.Controllers
             return rooms_name;
         }
 
-        //// POST: /User/Login
-        //[HttpPost]
-        //public ActionResult Login(LoginViewModel modelUser)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        UserContext userDb = new UserContext();
-        //        var userfound = userDb.users.Where(s => s.Nickname == modelUser.Username)
-        //        .FirstOrDefault<User>();
-        //        if (userfound != null)
-        //        {
-        //            if (modelUser.Password == userfound.Password)
-        //            {
-        //                try
-        //                {
-        //                    var userUpdated = new User { Nickname = modelUser.Username, statusUser = status.online };
-        //                    userDb.users.Attach(userUpdated);
-        //                    userDb.SaveChanges();
-        //                }
-        //                catch (Exception e)
-        //                {
-        //                    Console.WriteLine("Exception message : " + e.Message);
-        //                }
-        //            }
-        //            else
-        //            {
-        //                ViewBag.Error = "Incorrect password for this username";
-        //                return RedirectToAction("Index", "Home");
-
-        //                //return View("Index");
-        //            }
-        //            return RedirectToAction("Dashboard", "User");
-        //        }
-        //        else
-        //        {
-        //            ViewBag.Error = "There is no user with this login";
-        //            return RedirectToAction("Index", "Home");
-        //        }
-        //    }
-        //    ViewBag.Error = "Username and password are not correctly formatted";
-        //    return RedirectToAction("Index", "Home");
-        //}
-
         // GET : Users
         public ActionResult Create()
         {
@@ -110,28 +67,7 @@ namespace TalkApplication.Controllers
                 ViewBag.Error = message;
             }
             return View(mm);
-        }
-
-        ////NORMALLY NO NEED OF THIS FUNCTION 
-        //[HttpPost]
-        //public ActionResult Dashboard(DashboardModel nameUs)
-        //{
-        //    ViewData["legendFriend"] = "Friends";
-        //    string currentUser;
-        //    using (var userCont = new UserContext())
-        //    {
-        //        currentUser = "Mimitout";// nameUs.Username;
-        //        ViewData["currentUser"] = currentUser;
-        //        IEnumerable<User> alltheUsers = userCont.users.Where(x => x.Nickname != currentUser).ToList();
-        //        IEnumerable<Room> alltheRooms = userCont.rooms.ToList();
-        //        ViewData["rooms"] = alltheRooms;
-        //        ViewData["friends"] = alltheUsers;
-        //    }
-
-        //    ViewBag.User = currentUser;
-        //    return View(nameUs);
-        //}
-
+        }  
 
         [HttpPost]
         public ActionResult Create(User userForm)

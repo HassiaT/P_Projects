@@ -49,15 +49,12 @@ namespace TalkApplication.Hubs
 
         public async Task JoinRoom(string user, string roomName)
         {
-
             Clients.Caller.ConnectionId = Context.ConnectionId;
             //await Groups.Add(Context.ConnectionId, roomName);
             await Groups.Add(Clients.Caller.ConnectionId, roomName);
-
             // Clients.Group(roomName).displaymessageToPage(Context.User.Identity.Name, " joined the room.");
             // Clients.Group(roomName).displaymessageToPage(user, " joined the room.");
             string message = user + " joined  the room";
-
             Clients.Group(roomName).alert(message);
 
         }
@@ -69,7 +66,7 @@ namespace TalkApplication.Hubs
             //Clients.Group(roomName).displaymessageToPage(Context.User.Identity.Name, " left the room.");
             Clients.Caller.ConnectionId = Context.ConnectionId;
             //Groups.Remove(Context.ConnectionId, roomName);
-            string message = username + "just left the room";
+            string message = username + " just left the room";
             Clients.Group(roomName).alert(message);
             Groups.Remove(Context.ConnectionId, roomName);
         }
@@ -85,9 +82,7 @@ namespace TalkApplication.Hubs
         {
             //await Groups.Remove(Context.ConnectionId, roomName);
             //Clients.Group(roomName).displaymessageToPage(Context.User.Identity.Name, " logged off.");
-
             Disconnect(username);
-
             Clients.Caller.ConnectionId = Context.ConnectionId;
             //Groups.Remove(Context.ConnectionId, roomName);
             await Groups.Remove(Context.ConnectionId, roomName);

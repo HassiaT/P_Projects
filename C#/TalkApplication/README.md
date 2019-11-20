@@ -10,9 +10,9 @@
     4.Microsoft SQL Server/ SQLExpress \
     
 **3. How to use ATalk app**\
-    1. Welcome page \
-    [!alt text] (https://github.com/HassiaT/P_Projects/blob/local-experiments/AuxiliaryFiles/ChatApp/welcomeGUI.PNG)
-   
-    2.Access user dashboard after entering username and password
-    
+    1. Welcome page - Enter login and password \
+      ![alt text] (https://github.com/HassiaT/P_Projects/blob/local-experiments/AuxiliaryFiles/ChatApp/welcomeGUI.PNG) \
+      ![alt text] (https://github.com/HassiaT/P_Projects/blob/local-experiments/AuxiliaryFiles/ChatApp/welcome2GUI.PNG) \
 
+    2. Access user dashboard after entering username and password\
+ 

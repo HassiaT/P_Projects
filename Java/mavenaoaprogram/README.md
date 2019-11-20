@@ -1,3 +1,3 @@
 Testing my readme filTEST TEST TEST
 TEST INCLUDING IMAGE
-![alt text](http://url/to/img.png)
+![alt text](https://github.com/HassiaT/P_Projects/blob/local-experiments/AuxiliaryFiles/APPGUI.PNG)

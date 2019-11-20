@@ -11,5 +11,8 @@
     
 **3. How to use ATalk app**\
     1. Welcome page \
+    [!alt text] (https://github.com/HassiaT/P_Projects/blob/local-experiments/AuxiliaryFiles/ChatApp/welcomeGUI.PNG)
+   
+    2.Access user dashboard after entering username and password
     
 

@@ -6,15 +6,13 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.project.MavenProject;
 
 import java.io.File;
-
-import org.apache.maven.project.*;
-
-import java.io.IOException;
-import java.util.Properties;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
 
 
 @Mojo(name = "read-api-configuration")
@@ -92,6 +90,7 @@ public class MyMojoCurrency extends AbstractMojo {
             Properties local_properties = new Properties();
             local_properties.load(this.fileinput);
             this.properties = local_properties;
+
 //            for (Object key : this.properties.keySet()) {
 //                mydependentproject.setProperty((String) key, (String) fileProperties.get(key));
 //            }

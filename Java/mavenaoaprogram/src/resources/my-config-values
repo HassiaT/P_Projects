@@ -1,4 +1,10 @@
-BASE_URL = http://apilayer.net/api/
-ACCESS_KEY = /* PUT YOUR API ACCESS KEY HERE FOR THE CODE TO RUN CORRECTLY */
-ENDPOINT = live
-project.name = parent-maven-aoa-program
+BASE_URL=http://apilayer.net/api/
+BASE_URL_LIST=http://apilayer.net/list
+ACCESS_KEY=/* PUT YOUR API ACCESS KEY here for the project to work */
+ENDPOINT=live
+HISTDB=c:/q/HDBHisto/histdb
+HDBPORT=5012
+RDBPORT=5011
+TICKERPORT=5010
+SERVER=localhost
+project.name=parent-maven-aoa-program

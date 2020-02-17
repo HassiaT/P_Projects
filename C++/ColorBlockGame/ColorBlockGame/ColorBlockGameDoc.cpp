@@ -9,7 +9,7 @@
 #include "ColorBlockGame.h"
 #endif
 
-#include "ColorBlockGameDoc.h"
+#include "ColorBlockBoard.h"
 
 #include <propkey.h>
 #include "ColorBlockGameDoc.h"
@@ -27,20 +27,24 @@ END_MESSAGE_MAP()
 
 
 // CColorBlockGameDoc construction/destruction
-CColorBlockGameDoc::CColorBlockGameDoc() 
+CColorBlockGameDoc::CColorBlockGameDoc()
 {
 }
+
+
 
 CColorBlockGameDoc::~CColorBlockGameDoc()
 {
 }
+
+
 BOOL CColorBlockGameDoc::OnNewDocument()
 {
 	if (!CDocument::OnNewDocument())
 		return FALSE;
 	// TODO: add reinitialization code here
 	// (SDI documents will reuse this document)
-	theboard.setupboard();
+	theboard.setuptheboard();
 	return TRUE;
 }
 
@@ -71,7 +75,7 @@ void CColorBlockGameDoc::OnDrawThumbnail(CDC& dc, LPRECT lprcBounds)
 	CString strText = _T("TODO: implement thumbnail drawing here");
 	LOGFONT lf;
 
-	CFont* pDefaultGUIFont = CFont::FromHandle((HFONT) GetStockObject(DEFAULT_GUI_FONT));
+	CFont* pDefaultGUIFont = CFont::FromHandle((HFONT)GetStockObject(DEFAULT_GUI_FONT));
 	pDefaultGUIFont->GetLogFont(&lf);
 	lf.lfHeight = 36;
 
@@ -129,3 +133,4 @@ void CColorBlockGameDoc::Dump(CDumpContext& dc) const
 #endif //_DEBUG
 
 // CColorBlockGameDoc commands
+

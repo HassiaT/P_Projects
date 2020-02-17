@@ -26,6 +26,7 @@ protected:
 
 // Implementation
 public:
+	void ResizeWindow();
 	virtual ~CColorBlockGameView();
 #ifdef _DEBUG
 	virtual void AssertValid() const;
@@ -36,7 +37,11 @@ protected:
 
 // Generated message map functions
 protected:
-	DECLARE_MESSAGE_MAP()
+	DECLARE_MESSAGE_MAP();
+	
+
+public:
+	virtual void onInitialUpdate();
 };
 
 #ifndef _DEBUG  // debug version in ColorBlockGameView.cpp

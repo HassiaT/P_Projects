@@ -8,7 +8,6 @@
 #ifndef SHARED_HANDLERS
 #include "ColorBlockGame.h"
 #endif
-
 #include "ColorBlockGameDoc.h"
 #include "ColorBlockGameView.h"
 
@@ -32,6 +31,23 @@ CColorBlockGameView::CColorBlockGameView() noexcept
 
 }
 
+void CColorBlockGameView::ResizeWindow()
+{
+	CColorBlockGameDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+	if (!pDoc)
+		return;
+	CRect rcmyclient, rcmywindow;
+	GetClientRect(&rcmyclient);
+	GetParentFrame()->GetWindowRect(&rcmywindow);
+	int diffW = rcmywindow.Width() - rcmyclient.Width();
+	int diffH = rcmywindow.Height() - rcmyclient.Height();
+	rcmywindow.right = rcmywindow.left + pDoc->Getboardwidth() * pDoc->Getboardcolumns() + diffW;
+	rcmywindow.bottom = rcmywindow.top + pDoc->Getboardheight()* pDoc->Getboardrows() + diffH;
+	GetParentFrame()->MoveWindow(&rcmywindow);
+}
+
+
 CColorBlockGameView::~CColorBlockGameView()
 {
 }
@@ -46,12 +62,37 @@ BOOL CColorBlockGameView::PreCreateWindow(CREATESTRUCT& cs)
 
 // CColorBlockGameView drawing
 
-void CColorBlockGameView::OnDraw(CDC* /*pDC*/)
+void CColorBlockGameView::OnDraw(CDC* pDC)
 {
 	CColorBlockGameDoc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
+	
 	if (!pDoc)
 		return;
+	int docSave = pDC->SaveDC();
+	CRect rcmyClient;
+	GetClientRect(&rcmyClient);
+	/* getting background color of the document object :*/
+	COLORREF clr = pDoc->getcolorcell(-1, -1);
+	pDC->FillSolidRect(&rcmyClient, clr);
+	CBrush br; //drawing tool
+	br.CreateStockObject(HOLLOW_BRUSH);
+	CBrush* pbrOld = pDC->SelectObject(&br);
+
+	for (int i = 0; i < pDoc->Getboardrows(); i++) {
+		for (int j = 0; j < pDoc->Getboardcolumns(); j++) {
+			clr = pDoc->getcolorcell(i, j);
+			CRect rccell;
+			rccell.top = i * pDoc->Getboardheight();
+			rccell.left = j * pDoc->Getboardwidth();
+			rccell.right = rccell.left + pDoc->Getboardwidth();
+			rccell.bottom = rccell.top + pDoc->Getboardheight();
+			pDC->FillSolidRect(&rccell, clr);
+			pDC->Rectangle(&rccell);
+		}
+	}
+	pDC->RestoreDC(docSave);
+	br.DeleteObject();
 
 	// TODO: add draw code for native data here
 }
@@ -68,6 +109,12 @@ void CColorBlockGameView::AssertValid() const
 void CColorBlockGameView::Dump(CDumpContext& dc) const
 {
 	CView::Dump(dc);
+}
+
+void CColorBlockGameView::onInitialUpdate()
+{
+	CView::OnInitialUpdate();
+	ResizeWindow();
 }
 
 CColorBlockGameDoc* CColorBlockGameView::GetDocument() const // non-debug version is inline

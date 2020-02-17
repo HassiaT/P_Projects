@@ -1,13 +1,16 @@
 
-// ColorBlockGameDoc.h : interface of the CColorBlockGameDoc class
+// CColorBlockGameDoc.h : interface of the CColorBlockGameDoc class
 //
 #pragma once
 #include "ColorBlockBoard.h"
 
+
 class CColorBlockGameDoc : public CDocument
 {
+
+
 protected: // create from serialization only
-	CColorBlockGameDoc() noexcept;
+	CColorBlockGameDoc();
 	virtual ~CColorBlockGameDoc();
 	DECLARE_DYNCREATE(CColorBlockGameDoc)
 
@@ -20,8 +23,9 @@ public:
 	COLORREF getcolorcell(int _row, int _column) {
 		return theboard.getcolorcell(_row, _column);
 	}
-	void setupboard(void) {
-		theboard.setupboard();
+
+	void setuptheboard(void) {
+		theboard.setuptheboard();
 	}
 	int Getboardwidth() {
 		return theboard.Getboardwidth();
@@ -36,9 +40,11 @@ public:
 	int Getboardcolumns() {
 		return theboard.Getboardcolumns();
 	}
+
 	int Getboardrows() {
 		return theboard.Getboardrows();
 	}
+
 
 
 	// Overrides
@@ -52,14 +58,14 @@ public:
 
 	// Implementation
 public:
-	virtual ~CColorBlockGameDoc();
 #ifdef _DEBUG
 	virtual void AssertValid() const;
 	virtual void Dump(CDumpContext& dc) const;
 #endif
 
 protected:
-	ColorBlockBoard<int> theboard;
+	ColorBlockBoard theboard;
+
 
 	// Generated message map functions
 protected:

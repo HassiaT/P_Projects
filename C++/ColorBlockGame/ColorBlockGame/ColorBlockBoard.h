@@ -4,35 +4,37 @@
 
 #define NB_COLORS 4
 
-template <class T> using VBOARD= std::vector<std::vector<T>> VBOARD;
+typedef std::vector<std::vector<int>> VBOARDTYPE;
 
 
-template <class T>
+//intemplainte <intypename int>
 class ColorBlockBoard
 {
 private:
-	T board_columns;
-	T board_rows;
-	T board_height;
-	T board_width;
-	VBOARD board;
+	int board_columns;
+	int board_rows;
+	int board_height;
+	int board_width;
+	VBOARDTYPE board;
 	void createtheboard(void);
 	COLORREF board_colors[NB_COLORS];
 
+
+
 public:
 	ColorBlockBoard();
-	ColorBlockBoard(T, T);
+	ColorBlockBoard(int, int);
 	~ColorBlockBoard();
-	T Getboardcolumns() const;
-	T Getboardrows() const;
-	T Getboardheight() const;
-	T Getboardwidth() const;	
-	void Setboardcolumns(T);
-	void Setboardrows(T);
-	void Setboardheight(T);
-	void Setboardwidth(T);
+	int Getboardcolumns() const;
+	int Getboardrows() const;
+	int Getboardheight() const;
+	int Getboardwidth() const;	
+	void Setboardcolumns(int);
+	void Setboardrows(int);
+	void Setboardheight(int);
+	void Setboardwidth(int);
 	void deleteboard();
-	void setupboard();
-	COLORREF getcolorcell(T, T);
+	void setuptheboard();
+	COLORREF getcolorcell(int, int);
 };
 

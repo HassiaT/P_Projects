@@ -15,6 +15,9 @@ protected: // create from serialization only
 public:
 	CColorBlockGameDoc* GetDocument() const;
 
+	void OnLButtonDown(UINT nFlags, CPoint point);
+
+
 // Operations
 public:
 
@@ -42,6 +45,13 @@ protected:
 
 public:
 	virtual void onInitialUpdate();
+	//afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnUpdateGamelevel3couleurs(CCmdUI *pCmdUI);
+	afx_msg void OnUpdateGamelevel5couleurs(CCmdUI *pCmdUI);
+	afx_msg void OnUpdateGamelevel7couleurs(CCmdUI *pCmdUI);
+	afx_msg void OnGamelevel3couleurs();
+	afx_msg void OnGamelevel5couleurs();
+	afx_msg void OnGamelevel7couleurs();
 };
 
 #ifndef _DEBUG  // debug version in ColorBlockGameView.cpp

@@ -37,6 +37,27 @@ public:
 	{
 		theboard.deleteboard();
 	}
+
+	bool isGameOver() {
+		return theboard.isgameOver();
+	}
+	int getNbcolors() {
+		return theboard.GetNBColors();
+
+	}
+
+	void setNbcolors(int colors);
+	int deleteRangeofBlocks(int row, int column) {
+		return theboard.deleteRangeofBlocks(row, column);
+	}
+
+
+	int getRemainingBlocks() {
+		return theboard.getRemainingBlocks();
+	}
+
+
+
 	int Getboardcolumns() {
 		return theboard.Getboardcolumns();
 	}

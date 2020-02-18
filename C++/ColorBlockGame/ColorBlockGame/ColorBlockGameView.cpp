@@ -21,7 +21,17 @@
 IMPLEMENT_DYNCREATE(CColorBlockGameView, CView)
 
 BEGIN_MESSAGE_MAP(CColorBlockGameView, CView)
+	ON_WM_LBUTTONDOWN()
+	ON_WM_ERASEBKGND()
+	ON_UPDATE_COMMAND_UI(ID_GAMELEVEL_3COULEURS, &CColorBlockGameView::OnUpdateGamelevel3couleurs)
+	ON_UPDATE_COMMAND_UI(ID_GAMELEVEL_5COULEURS, &CColorBlockGameView::OnUpdateGamelevel5couleurs)
+	ON_UPDATE_COMMAND_UI(ID_GAMELEVEL_7COULEURS, &CColorBlockGameView::OnUpdateGamelevel7couleurs)
+	ON_COMMAND(ID_GAMELEVEL_3COULEURS, &CColorBlockGameView::OnGamelevel3couleurs)
+	ON_COMMAND(ID_GAMELEVEL_5COULEURS, &CColorBlockGameView::OnGamelevel5couleurs)
+	ON_COMMAND(ID_GAMELEVEL_7COULEURS, &CColorBlockGameView::OnGamelevel7couleurs)
 END_MESSAGE_MAP()
+
+
 
 // CColorBlockGameView construction/destruction
 
@@ -66,7 +76,7 @@ void CColorBlockGameView::OnDraw(CDC* pDC)
 {
 	CColorBlockGameDoc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
-	
+
 	if (!pDoc)
 		return;
 	int docSave = pDC->SaveDC();
@@ -126,3 +136,91 @@ CColorBlockGameDoc* CColorBlockGameView::GetDocument() const // non-debug versio
 
 
 // CColorBlockGameView message handlers
+void CColorBlockGameView::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	CColorBlockGameDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+	if (!pDoc)
+		return;
+	int row_coordinate = point.x / pDoc->Getboardheight();
+	int col_coordinate = point.y / pDoc->Getboardwidth();
+	int count = pDoc->deleteRangeofBlocks(row_coordinate, col_coordinate);
+	if (count > 0) {
+		Invalidate();
+		UpdateWindow();
+		if (pDoc->isGameOver())
+		{
+			int remaining = pDoc->getRemainingBlocks();
+			CString message;
+			message.Format(_T("You cannot make further moves. Remaining \nBlocks %d"), remaining);
+			MessageBox(message, _T("GAME OVER"), MB_OK | MB_ICONINFORMATION);
+		}
+	}
+	CView::OnLButtonDown(nFlags, point);
+}
+
+
+void CColorBlockGameView::OnUpdateGamelevel3couleurs(CCmdUI *pCmdUI)
+{
+	CColorBlockGameDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+	if (!pDoc)
+		return;
+	pCmdUI->SetCheck(pDoc->getNbcolors() == 3);
+}
+
+
+void CColorBlockGameView::OnUpdateGamelevel5couleurs(CCmdUI *pCmdUI)
+{
+	CColorBlockGameDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+	if (!pDoc)
+		return;
+	pCmdUI->SetCheck(pDoc->getNbcolors() == 5);
+}
+
+
+void CColorBlockGameView::OnUpdateGamelevel7couleurs(CCmdUI *pCmdUI)
+{
+	CColorBlockGameDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+	if (!pDoc)
+		return;
+	pCmdUI->SetCheck(pDoc->getNbcolors() == 7);
+}
+
+
+void CColorBlockGameView::OnGamelevel3couleurs()
+{
+	CColorBlockGameDoc*pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+	if (!pDoc)
+		return;
+	pDoc->setNbcolors(3);
+	Invalidate();
+	UpdateWindow();
+}
+
+
+void CColorBlockGameView::OnGamelevel5couleurs()
+{
+	CColorBlockGameDoc*pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+	if (!pDoc)
+		return;
+	pDoc->setNbcolors(5);
+	Invalidate();
+	UpdateWindow();
+}
+
+
+void CColorBlockGameView::OnGamelevel7couleurs()
+{
+	CColorBlockGameDoc*pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+	if (!pDoc)
+		return;
+	pDoc->setNbcolors(7);
+	Invalidate();
+	UpdateWindow();
+}

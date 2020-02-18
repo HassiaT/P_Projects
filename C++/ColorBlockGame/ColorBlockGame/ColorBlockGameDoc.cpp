@@ -13,6 +13,7 @@
 
 #include <propkey.h>
 #include "ColorBlockGameDoc.h"
+#include "ColorBlockGameDoc.h"
 
 
 #ifdef _DEBUG
@@ -37,6 +38,12 @@ CColorBlockGameDoc::~CColorBlockGameDoc()
 {
 }
 
+
+void CColorBlockGameDoc::setNbcolors(int colors)
+{
+	theboard.SetNBColors(colors);
+	theboard.setuptheboard();
+}
 
 BOOL CColorBlockGameDoc::OnNewDocument()
 {

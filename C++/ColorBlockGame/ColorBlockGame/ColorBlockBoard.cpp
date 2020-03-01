@@ -8,9 +8,7 @@ typedef std::vector<int> VBCOLUMS;
 
 COLORREF ColorBlockBoard::board_colors[MAX_NUMBER_COLORS];
 
-
-
-ColorBlockBoard::ColorBlockBoard(void) : NB_colors(3), NB_remaining(0), board_rows(DIM1), board_columns(DIM1), board_height(DIM2), board_width(DIM2)
+ColorBlockBoard::ColorBlockBoard() : NB_colors(3), NB_remaining(0), board_rows(DIM1), board_columns(DIM1), board_height(DIM2), board_width(DIM2)
 {
 	std::cout << "Default constructor called \n";
 	VBCOLUMS vbcolumns(board_columns);
@@ -53,6 +51,27 @@ ColorBlockBoard::ColorBlockBoard(int heightWidth, int rowColumn) :NB_colors(3), 
 	std::cout << "Ending constructor of class ColorBlockBoard  \n";
 }
 
+
+
+ColorBlockBoard::ColorBlockBoard(const ColorBlockBoard &board1) {
+	board_rows = board1.board_rows;
+	board_columns = board1.board_columns;
+	board_width = board1.board_width;
+	board_height = board1.board_height;
+	NB_remaining = board1.NB_remaining;
+	NB_colors = board1.NB_colors;
+	for (int i = 0; i < MAX_NUMBER_COLORS; i++) {
+		board_colors[i] = board1.board_colors[i];
+	}
+	board.reserve(0);
+	createtheboard();
+	for (int r = 0; r < board_rows; r++) {
+		for (int c = 0; c < board_columns; c++) {
+			board[r][c] = board1.board[r][c];
+		}
+	}
+}
+
 ColorBlockBoard::~ColorBlockBoard(void)
 {
 	std::cout << "Starting destructor of typename ColorBlockBoard  \n";
@@ -73,6 +92,7 @@ void ColorBlockBoard::createtheboard(void)
 		}
 	}
 }
+
 
 int ColorBlockBoard::deleteNeighboringBlocks(int r, int c, int color, DIRECTION D)
 {
@@ -265,14 +285,15 @@ void ColorBlockBoard::SetNBColors(int nbcolors)
 void ColorBlockBoard::Setboardcolumns(int _cols)
 {
 	std::cout << "In column setter \n";
-	this->board_columns = _cols;
+	this->board_columns = (_cols >= MIN_HEIGHT) ? _cols : MIN_HEIGHT;
 }
 
 
 void ColorBlockBoard::Setboardrows(int _rows)
 {
 	std::cout << "In row setter \n";
-	this->board_rows = _rows;
+	this->board_rows = (_rows >= MIN_HEIGHT) ? _rows : MIN_HEIGHT;
+
 }
 
 
@@ -280,12 +301,12 @@ void ColorBlockBoard::Setboardrows(int _rows)
 void ColorBlockBoard::Setboardheight(int _height)
 {
 	std::cout << "In height setter \n";
-	this->board_height = _height;
+	this->board_height = (_height >= MIN_WIDTH) ? _height : MIN_WIDTH;
 }
 
 
 void ColorBlockBoard::Setboardwidth(int _width)
 {
 	std::cout << "In width setter \n";
-	this->board_height = _width;
+	this->board_width = (_width >= MIN_WIDTH) ? _width : MIN_WIDTH;
 }

@@ -39,9 +39,6 @@
     <ClInclude Include="ColorBlockBoard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="COptionsDialog.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ColorBlockGame.cpp">
@@ -60,9 +57,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ColorBlockBoard.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="COptionsDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

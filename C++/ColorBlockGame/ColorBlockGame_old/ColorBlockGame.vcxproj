@@ -187,7 +187,6 @@
     <ClInclude Include="ColorBlockGame.h" />
     <ClInclude Include="ColorBlockGameDoc.h" />
     <ClInclude Include="ColorBlockGameView.h" />
-    <ClInclude Include="COptionsDialog.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
@@ -198,7 +197,6 @@
     <ClCompile Include="ColorBlockGame.cpp" />
     <ClCompile Include="ColorBlockGameDoc.cpp" />
     <ClCompile Include="ColorBlockGameView.cpp" />
-    <ClCompile Include="COptionsDialog.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

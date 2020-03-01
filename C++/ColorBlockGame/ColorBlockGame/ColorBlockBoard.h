@@ -4,6 +4,8 @@
 
 #define NB_COLORS 4
 #define MAX_NUMBER_COLORS 8
+#define MIN_HEIGHT 3
+#define MIN_WIDTH 5
 
 typedef std::vector<std::vector<int>> VBOARDTYPE;
 
@@ -34,11 +36,11 @@ private:
 	int deleteNeighboringBlocks(int r, int c, int color, DIRECTION D);
 	void reduceBoard(void);
 
-
 public:
 	
 	ColorBlockBoard();
 	ColorBlockBoard(int, int);
+	ColorBlockBoard(const ColorBlockBoard&);
 	~ColorBlockBoard();
 	int Getboardcolumns() const;
 	int Getboardrows() const;

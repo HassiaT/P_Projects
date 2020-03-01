@@ -10,6 +10,7 @@
 #endif
 #include "ColorBlockGameDoc.h"
 #include "ColorBlockGameView.h"
+#include "COptionsDialog.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -29,6 +30,12 @@ BEGIN_MESSAGE_MAP(CColorBlockGameView, CView)
 	ON_COMMAND(ID_GAMELEVEL_3COULEURS, &CColorBlockGameView::OnGamelevel3couleurs)
 	ON_COMMAND(ID_GAMELEVEL_5COULEURS, &CColorBlockGameView::OnGamelevel5couleurs)
 	ON_COMMAND(ID_GAMELEVEL_7COULEURS, &CColorBlockGameView::OnGamelevel7couleurs)
+	ON_COMMAND(ID_SETUP_BLOCKCOUNT, &CColorBlockGameView::OnSetupBlockcount)
+	ON_COMMAND(ID_SETUP_BLOCKSIZE, &CColorBlockGameView::OnSetupBlocksize)
+	ON_COMMAND(ID_EDIT_UNDO, &CColorBlockGameView::OnEditUndo)
+	ON_UPDATE_COMMAND_UI(ID_EDIT_UNDO, &CColorBlockGameView::OnUpdateEditUndo)
+	ON_COMMAND(ID_EDIT_REDO, &CColorBlockGameView::OnEditRedo)
+	ON_UPDATE_COMMAND_UI(ID_EDIT_REDO, &CColorBlockGameView::OnUpdateEditRedo)
 END_MESSAGE_MAP()
 
 
@@ -223,4 +230,89 @@ void CColorBlockGameView::OnGamelevel7couleurs()
 	pDoc->setNbcolors(7);
 	Invalidate();
 	UpdateWindow();
+}
+
+
+void CColorBlockGameView::OnSetupBlockcount()
+{
+	CColorBlockGameDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+	if (!pDoc)
+		return;
+	COptionsDialog boxdialog(true, this);
+	boxdialog.nRow1 = pDoc->Getboardrows();
+	boxdialog.nColumn1 = pDoc->Getboardcolumns();
+	if (boxdialog.DoModal() == IDOK) {
+		pDoc->deleteboard();
+		pDoc->Setboardrows(boxdialog.nRow1);
+		pDoc->Setboardcolumns(boxdialog.nColumn1);
+		pDoc->setuptheboard();
+		ResizeWindow();
+	}
+}
+
+
+
+
+void CColorBlockGameView::OnSetupBlocksize()
+{
+	CColorBlockGameDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+	if (!pDoc)
+		return;
+	COptionsDialog boxdialog(false, this);
+	boxdialog.nRow1 = pDoc->Getboardwidth();
+	boxdialog.nColumn1 = pDoc->Getboardheight();
+	if (boxdialog.DoModal() == IDOK) {
+		pDoc->deleteboard();
+		pDoc->Setboardrows(boxdialog.nRow1);
+		pDoc->Setboardcolumns(boxdialog.nColumn1);
+		pDoc->setuptheboard();
+		ResizeWindow();
+	}
+}
+
+
+void CColorBlockGameView::OnEditUndo()
+{
+	CColorBlockGameDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+	if (!pDoc)
+		return;
+	pDoc->UndoLastMove();
+	Invalidate();
+	UpdateWindow();
+}
+
+
+void CColorBlockGameView::OnUpdateEditUndo(CCmdUI *pCmdUI)
+{
+	CColorBlockGameDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+	if (!pDoc)
+		return;
+	pCmdUI->Enable(pDoc->CheckUndo());
+}
+
+
+void CColorBlockGameView::OnEditRedo()
+{
+	CColorBlockGameDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+	if (!pDoc)
+		return;
+	pDoc->RedoLast();
+	Invalidate();
+	UpdateWindow();
+}
+
+
+
+void CColorBlockGameView::OnUpdateEditRedo(CCmdUI *pCmdUI)
+{
+	CColorBlockGameDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+	if (!pDoc)
+		return;
+	pCmdUI->Enable(pDoc->CheckRedo());
 }

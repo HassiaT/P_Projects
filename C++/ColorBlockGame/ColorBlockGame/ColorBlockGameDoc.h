@@ -3,6 +3,8 @@
 //
 #pragma once
 #include "ColorBlockBoard.h"
+#include <stack>
+
 
 
 class CColorBlockGameDoc : public CDocument
@@ -20,53 +22,80 @@ public:
 	// Operations
 public:
 
+	void UndoLastMove();
+	bool CheckUndo();
+	void RedoLast();
+	bool CheckRedo();
+
 	COLORREF getcolorcell(int _row, int _column) {
-		return theboard.getcolorcell(_row, _column);
+		return theboard->getcolorcell(_row, _column);
 	}
 
 	void setuptheboard(void) {
-		theboard.setuptheboard();
+		theboard->setuptheboard();
 	}
+
 	int Getboardwidth() {
-		return theboard.Getboardwidth();
+		return theboard->Getboardwidth();
 	}
+
+	void Setboardwidth(int width) {
+		theboard->Setboardwidth(width);
+	}
+
 	int Getboardheight() {
-		return theboard.Getboardheight();
+		return theboard->Getboardheight();
 	}
+
+	void Setboardheight(int height) {
+		theboard->Setboardheight(height);
+	}
+
+
 	void deleteboard(void)
 	{
-		theboard.deleteboard();
+		theboard->deleteboard();
 	}
 
 	bool isGameOver() {
-		return theboard.isgameOver();
+		return theboard->isgameOver();
 	}
-	int getNbcolors() {
-		return theboard.GetNBColors();
 
+	int getNbcolors() {
+		return theboard->GetNBColors();
 	}
 
 	void setNbcolors(int colors);
-	int deleteRangeofBlocks(int row, int column) {
-		return theboard.deleteRangeofBlocks(row, column);
-	}
 
+	int deleteRangeofBlocks(int row, int column) {
+		std::shared_ptr<ColorBlockBoard> newBoard(theboard);
+		stackUndo.push(newBoard);
+		ClearRedo();
+		int blocks = theboard->deleteRangeofBlocks(row, column);
+		if (theboard->isgameOver())
+			ClearUndo();
+		return blocks;
+	}
 
 	int getRemainingBlocks() {
-		return theboard.getRemainingBlocks();
+		return theboard->getRemainingBlocks();
 	}
 
-
-
 	int Getboardcolumns() {
-		return theboard.Getboardcolumns();
+		return theboard->Getboardcolumns();
+	}
+
+	void Setboardcolumns(int cols) {
+		theboard->Setboardcolumns(cols);
 	}
 
 	int Getboardrows() {
-		return theboard.Getboardrows();
+		return theboard->Getboardrows();
 	}
 
-
+	void Setboardrows(int rows) {
+		theboard->Setboardrows(rows);
+	}
 
 	// Overrides
 public:
@@ -85,11 +114,17 @@ public:
 #endif
 
 protected:
-	ColorBlockBoard theboard;
+	//ColorBlockBoard theboard;
+	std::shared_ptr<ColorBlockBoard> theboard;
+
 
 
 	// Generated message map functions
 protected:
+	void ClearUndo();
+	void ClearRedo();
+	std::stack<std::shared_ptr<ColorBlockBoard>> stackUndo;
+	std::stack<std::shared_ptr<ColorBlockBoard>> stackRedo;
 	DECLARE_MESSAGE_MAP()
 
 #ifdef SHARED_HANDLERS

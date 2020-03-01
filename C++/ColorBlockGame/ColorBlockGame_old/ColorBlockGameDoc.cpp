@@ -9,11 +9,11 @@
 #include "ColorBlockGame.h"
 #endif
 
-#include "ColorBlockBoard.h"
+#include "ColorBlockGameDoc.h"
 
 #include <propkey.h>
 #include "ColorBlockGameDoc.h"
-#include<iostream>
+
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -25,85 +25,27 @@ BEGIN_MESSAGE_MAP(CColorBlockGameDoc, CDocument)
 END_MESSAGE_MAP()
 
 
-// CColorBlockGameDoc construction/destruction
-CColorBlockGameDoc::CColorBlockGameDoc(void)
-{
-	std::cout << "In constructor for class ColorBlockGame \n";
-	auto delColorBlockBoard = [](ColorBlockBoard* pBoard) {
-		std::cout << "Deleting color block board";
-		delete pBoard;
-	};
 
-	theboard = std::make_shared<ColorBlockBoard>();
+// CColorBlockGameDoc construction/destruction
+CColorBlockGameDoc::CColorBlockGameDoc() 
+{
 }
 
 CColorBlockGameDoc::~CColorBlockGameDoc()
 {
-	ClearUndo();
-	ClearRedo();
 }
-
-void CColorBlockGameDoc::UndoLastMove()
-{
-	if (stackUndo.empty())
-		return;
-	stackRedo.push(theboard);
-	theboard = stackUndo.top();
-	stackUndo.pop();
-}
-
-bool CColorBlockGameDoc::CheckUndo()
-{
-	return !stackUndo.empty();
-}
-
-void CColorBlockGameDoc::RedoLast()
-{
-	if (stackRedo.empty())
-		return;
-	stackUndo.push(theboard);
-	theboard = stackRedo.top();
-	stackRedo.pop();
-
-}
-
-bool CColorBlockGameDoc::CheckRedo()
-{
-	return !stackRedo.empty();
-}
-
-void CColorBlockGameDoc::setNbcolors(int colors)
-{
-	theboard->SetNBColors(colors);
-	theboard->setuptheboard();
-}
-
 BOOL CColorBlockGameDoc::OnNewDocument()
 {
 	if (!CDocument::OnNewDocument())
 		return FALSE;
-	theboard->setuptheboard();
-	ClearUndo();
-	ClearRedo();
+	// TODO: add reinitialization code here
+	// (SDI documents will reuse this document)
+	theboard.setupboard();
 	return TRUE;
 }
 
 
-void CColorBlockGameDoc::ClearUndo()
-{
-	while (!stackUndo.empty()) {
-		stackUndo.pop();
-	}
-}
 
-void CColorBlockGameDoc::ClearRedo()
-{
-	while (!stackRedo.empty()) {
-		stackRedo.pop();
-	}
-
-
-}
 
 // CColorBlockGameDoc serialization
 void CColorBlockGameDoc::Serialize(CArchive& ar)
@@ -129,7 +71,7 @@ void CColorBlockGameDoc::OnDrawThumbnail(CDC& dc, LPRECT lprcBounds)
 	CString strText = _T("TODO: implement thumbnail drawing here");
 	LOGFONT lf;
 
-	CFont* pDefaultGUIFont = CFont::FromHandle((HFONT)GetStockObject(DEFAULT_GUI_FONT));
+	CFont* pDefaultGUIFont = CFont::FromHandle((HFONT) GetStockObject(DEFAULT_GUI_FONT));
 	pDefaultGUIFont->GetLogFont(&lf);
 	lf.lfHeight = 36;
 
@@ -150,15 +92,6 @@ void CColorBlockGameDoc::InitializeSearchContent()
 
 	// For example:  strSearchContent = _T("point;rectangle;circle;ole object;");
 	SetSearchContent(strSearchContent);
-}
-
-void CColorBlockGameDoc::ClearUndo()
-{
-	std::cout << "Clear";
-}
-
-void CColorBlockGameDoc::ClearRedo()
-{
 }
 
 void CColorBlockGameDoc::SetSearchContent(const CString& value)

@@ -15,9 +15,6 @@ protected: // create from serialization only
 public:
 	CColorBlockGameDoc* GetDocument() const;
 
-	void OnLButtonDown(UINT nFlags, CPoint point);
-
-
 // Operations
 public:
 
@@ -29,7 +26,6 @@ protected:
 
 // Implementation
 public:
-	void ResizeWindow();
 	virtual ~CColorBlockGameView();
 #ifdef _DEBUG
 	virtual void AssertValid() const;
@@ -40,24 +36,7 @@ protected:
 
 // Generated message map functions
 protected:
-	DECLARE_MESSAGE_MAP();
-	
-
-public:
-	virtual void onInitialUpdate();
-	//afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
-	afx_msg void OnUpdateGamelevel3couleurs(CCmdUI *pCmdUI);
-	afx_msg void OnUpdateGamelevel5couleurs(CCmdUI *pCmdUI);
-	afx_msg void OnUpdateGamelevel7couleurs(CCmdUI *pCmdUI);
-	afx_msg void OnGamelevel3couleurs();
-	afx_msg void OnGamelevel5couleurs();
-	afx_msg void OnGamelevel7couleurs();
-	afx_msg void OnSetupBlockcount();
-	afx_msg void OnSetupBlocksize();
-	afx_msg void OnEditUndo();
-	afx_msg void OnUpdateEditUndo(CCmdUI *pCmdUI);
-	afx_msg void OnEditRedo();
-	afx_msg void OnUpdateEditRedo(CCmdUI *pCmdUI);
+	DECLARE_MESSAGE_MAP()
 };
 
 #ifndef _DEBUG  // debug version in ColorBlockGameView.cpp

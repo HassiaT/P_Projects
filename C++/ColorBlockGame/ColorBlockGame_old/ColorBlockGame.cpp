@@ -111,7 +111,7 @@ BOOL CColorBlockGameApp::InitInstance()
 
 // CAboutDlg dialog used for App About
 
-class CAboutDlg : public CDialog
+class CAboutDlg : public CDialogEx
 {
 public:
 	CAboutDlg() noexcept;
@@ -127,25 +127,18 @@ protected:
 // Implementation
 protected:
 	DECLARE_MESSAGE_MAP()
-public:
-	afx_msg void OnGamelevel3couleurs();
-	afx_msg void OnGamelevel5couleurs();
-	afx_msg void OnGamelevel7couleurs();
 };
 
-CAboutDlg::CAboutDlg() noexcept : CDialog(IDD_ABOUTBOX)
+CAboutDlg::CAboutDlg() noexcept : CDialogEx(IDD_ABOUTBOX)
 {
 }
 
 void CAboutDlg::DoDataExchange(CDataExchange* pDX)
 {
-	CDialog::DoDataExchange(pDX);
+	CDialogEx::DoDataExchange(pDX);
 }
 
-BEGIN_MESSAGE_MAP(CAboutDlg, CDialog)
-	ON_COMMAND(ID_GAMELEVEL_3COULEURS, &CAboutDlg::OnGamelevel3couleurs)
-	ON_COMMAND(ID_GAMELEVEL_5COULEURS, &CAboutDlg::OnGamelevel5couleurs)
-	ON_COMMAND(ID_GAMELEVEL_7COULEURS, &CAboutDlg::OnGamelevel7couleurs)
+BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
 END_MESSAGE_MAP()
 
 // App command to run the dialog
@@ -159,21 +152,3 @@ void CColorBlockGameApp::OnAppAbout()
 
 
 
-
-
-void CAboutDlg::OnGamelevel3couleurs()
-{
-	// TODO: Add your command handler code here
-}
-
-
-void CAboutDlg::OnGamelevel5couleurs()
-{
-	// TODO: Add your command handler code here
-}
-
-
-void CAboutDlg::OnGamelevel7couleurs()
-{
-	// TODO: Add your command handler code here
-}

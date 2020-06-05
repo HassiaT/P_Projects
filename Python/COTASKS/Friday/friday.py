@@ -1,7 +1,4 @@
-# -*- coding: utf-8 -*-
 """
-ID: hassia.1
-LANG : PYTHON3
 TASK : friday
 """
 

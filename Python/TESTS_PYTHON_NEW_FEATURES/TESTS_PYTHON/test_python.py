@@ -18,17 +18,36 @@ def checking_str_duplicate(s):
     print(set_characters)
     result = (len(set_characters) == len(s))
     return result
-    
+
+''' Given a string find the first non-repeating character in it and return its index. If it doesn't exist '''
+''' return -1 '''
+def find_index_first_non_repeating_char(s):
+    index = -1
+    count_characters = {}
+    current = -1
+    for c in s:
+     if not c in count_characters:
+         count_characters[c] = 1
+     else:
+         count_characters[c] += 1
+    for c in s:
+        current += 1
+        if (count_characters[c] == 1):
+            index = current
+            break
+    return index
+
+'''
 def main():
     s="abcbdbrirol"
     s_bis="abcdefg"
     print(checking_str_duplicate(s_bis))
-    
-    
+
+   
 if __name__ == "__main__":
     main()
 
-
+'''
 
 
     
